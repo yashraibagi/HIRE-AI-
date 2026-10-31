@@ -1,0 +1,297 @@
+{
+  "aptitude": [
+    {
+      "id": "apt-beg-01",
+      "category": "Quantitative Aptitude",
+      "level": "Beginner",
+      "question": "A train travels 180 km in 3 hours. What is its average speed in km/h?",
+      "options": ["50", "55", "60", "65"],
+      "correct_answer": "60",
+      "explanation": "Average speed = total distance / total time = 180 / 3 = 60 km/h. This is a direct ratio calculation, so no complex formula is needed."
+    },
+    {
+      "id": "apt-beg-02",
+      "category": "Quantitative Aptitude",
+      "level": "Beginner",
+      "question": "What is 15% of 240?",
+      "options": ["24", "30", "36", "40"],
+      "correct_answer": "36",
+      "explanation": "15% of 240 = 0.15 × 240 = 36. A quick trick is to find 10% first (24), then 5% (12), and add them together."
+    },
+    {
+      "id": "apt-beg-03",
+      "category": "Logical Reasoning",
+      "level": "Beginner",
+      "question": "If all roses are flowers and some flowers are red, which statement is definitely true?",
+      "options": [
+        "All red things are roses",
+        "Some roses are red",
+        "All flowers are roses",
+        "Some roses are flowers"
+      ],
+      "correct_answer": "Some roses are flowers",
+      "explanation": "The statement 'all roses are flowers' definitely implies that roses belong to the flower category. That is a direct categorical relationship."
+    },
+    {
+      "id": "apt-beg-04",
+      "category": "Verbal Ability",
+      "level": "Beginner",
+      "question": "Choose the correct synonym of 'Brisk':",
+      "options": ["Slow", "Quick", "Weak", "Tired"],
+      "correct_answer": "Quick",
+      "explanation": "Brisk means lively and quick. 'Quick' is the closest substitute in meaning."
+    },
+    {
+      "id": "apt-int-01",
+      "category": "Quantitative Aptitude",
+      "level": "Intermediate",
+      "question": "If 12 workers complete a task in 8 days, how many days will 16 workers take working at the same rate?",
+      "options": ["4", "5", "6", "7"],
+      "correct_answer": "6",
+      "explanation": "Work is inversely proportional to the workforce: 12 × 8 = 96 worker-days. With 16 workers, days = 96 / 16 = 6."
+    },
+    {
+      "id": "apt-int-02",
+      "category": "Quantitative Aptitude",
+      "level": "Intermediate",
+      "question": "A shopkeeper marks an item 25% above cost price and gives a 10% discount. What is the net profit percentage?",
+      "options": ["10%", "12.5%", "15%", "17.5%"],
+      "correct_answer": "12.5%",
+      "explanation": "Let cost price = 100. Marked price = 125. After 10% discount, selling price = 112.5. Profit = 12.5%."
+    },
+    {
+      "id": "apt-int-03",
+      "category": "Logical Reasoning",
+      "level": "Intermediate",
+      "question": "A series: 2, 6, 12, 20, 30, ?",
+      "options": ["36", "40", "42", "48"],
+      "correct_answer": "42",
+      "explanation": "The differences are 4, 6, 8, 10. So the next difference is 12 and 30 + 12 = 42."
+    },
+    {
+      "id": "apt-int-04",
+      "category": "Logical Reasoning",
+      "level": "Intermediate",
+      "question": "If in a certain code, 'BANK' is written as 'CBOO', how will 'LOAN' be written?",
+      "options": ["MPBP", "MPCP", "MPDO", "MPCQ"],
+      "correct_answer": "MPCP",
+      "explanation": "Each letter is shifted by +1: B→C, A→B, N→O, K→L. Apply the same pattern to LOAN to get MPCP."
+    },
+    {
+      "id": "apt-int-05",
+      "category": "Verbal Ability",
+      "level": "Intermediate",
+      "question": "Select the correct sentence.",
+      "options": [
+        "She don't know the answer.",
+        "She doesn't knows the answer.",
+        "She doesn't know the answer.",
+        "She didn't knew the answer."
+      ],
+      "correct_answer": "She doesn't know the answer.",
+      "explanation": "With 'she', use 'doesn't' and keep the base verb: 'know'."
+    },
+    {
+      "id": "apt-int-06",
+      "category": "Verbal Ability",
+      "level": "Intermediate",
+      "question": "The antonym of 'Candid' is:",
+      "options": ["Frank", "Honest", "Reserved", "Open"],
+      "correct_answer": "Reserved",
+      "explanation": "Candid means honest and straightforward. The opposite is reserved or guarded."
+    },
+    {
+      "id": "apt-adv-01",
+      "category": "Quantitative Aptitude",
+      "level": "Advanced",
+      "question": "A mixture contains milk and water in the ratio 5:3. If 16 liters of water are added, the ratio becomes 5:7. What was the original quantity of milk?",
+      "options": ["20L", "25L", "30L", "35L"],
+      "correct_answer": "20L",
+      "explanation": "Let milk = 5x and water = 3x. After adding 16 liters of water: 5x / (3x + 16) = 5 / 7. Solve 35x = 15x + 80 => 20x = 80 => x = 4, so milk = 5x = 20 liters."
+    },
+    {
+      "id": "apt-adv-02",
+      "category": "Quantitative Aptitude",
+      "level": "Advanced",
+      "question": "A sum of money doubles in 8 years at simple interest. What is the rate of interest?",
+      "options": ["10%", "12.5%", "15%", "20%"],
+      "correct_answer": "12.5%",
+      "explanation": "Simple interest formula: SI = P × R × T / 100. If the amount doubles, interest equals principal. So P = P × R × 8 / 100 -> R = 100 / 8 = 12.5%."
+    },
+    {
+      "id": "apt-adv-03",
+      "category": "Logical Reasoning",
+      "level": "Advanced",
+      "question": "In a family, P is the father of Q, R is the mother of S, and Q is married to S. How is P related to R?",
+      "options": ["Father-in-law", "Mother-in-law", "Brother", "Uncle"],
+      "correct_answer": "Father-in-law",
+      "explanation": "Q is married to S, so P is Q's father and R is S's mother. Therefore P is father-in-law to R's child-in-law relationship with S."
+    },
+    {
+      "id": "apt-adv-04",
+      "category": "Verbal Ability",
+      "level": "Advanced",
+      "question": "Choose the option that best completes the sentence: 'The manager demanded that everyone ______ on time.'",
+      "options": ["comes", "come", "came", "is coming"],
+      "correct_answer": "come",
+      "explanation": "After 'demanded that', the verb takes the subjunctive form: 'come'. This is a classic grammar rule used in aptitude and placement tests."
+    }
+  ],
+  "dsa": [
+    {
+      "id": "dsa-beg-01",
+      "title": "Two Sum",
+      "pattern": "Hash Map",
+      "level": "Beginner",
+      "statement": "Given an array of integers nums and a target integer, return the indices of the two numbers that add up to the target. Assume one valid answer exists and each element is used once.",
+      "approach": "Use a hash map to store seen values and their indices. For each number, find the complement target - num and check if it has already been seen.",
+      "python_solution": "def two_sum(nums, target):\n    seen = {}\n    for i, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], i]\n        seen[num] = i\n    return []\n\nprint(two_sum([2, 7, 11, 15], 9))  # [0, 1]"
+    },
+    {
+      "id": "dsa-beg-02",
+      "title": "Valid Parentheses",
+      "pattern": "Stack",
+      "level": "Beginner",
+      "statement": "Given a string of parentheses, determine if it is valid: every opening bracket must be closed in the correct order.",
+      "approach": "Use a stack. Push opening brackets; when a closing bracket appears, check it matches the most recent opening bracket.",
+      "python_solution": "def is_valid(s):\n    stack = []\n    pairs = {')': '(', ']': '[', '}': '{'}\n\n    for ch in s:\n        if ch in '([{':\n            stack.append(ch)\n        elif not stack or stack.pop() != pairs[ch]:\n            return False\n    return not stack\n\nprint(is_valid('()[]{}'))  # True"
+    },
+    {
+      "id": "dsa-beg-03",
+      "title": "Merge Two Sorted Arrays",
+      "pattern": "Two Pointers",
+      "level": "Beginner",
+      "statement": "Given two sorted arrays, merge them into one sorted array without using extra sorting operations.",
+      "approach": "Use two pointers starting from the beginning of both arrays and add the smaller element to the result.",
+      "python_solution": "def merge_sorted(a, b):\n    i = j = 0\n    merged = []\n\n    while i < len(a) and j < len(b):\n        if a[i] <= b[j]:\n            merged.append(a[i])\n            i += 1\n        else:\n            merged.append(b[j])\n            j += 1\n\n    merged.extend(a[i:])\n    merged.extend(b[j:])\n    return merged\n\nprint(merge_sorted([1, 3, 5], [2, 4, 6]))"
+    },
+    {
+      "id": "dsa-int-01",
+      "title": "Longest Substring Without Repeating Characters",
+      "pattern": "Sliding Window",
+      "level": "Intermediate",
+      "statement": "Given a string s, find the length of the longest substring without repeating characters.",
+      "approach": "Use a sliding window and a hash map to remember the most recent position of each character. Move the left pointer when a repeat is found.",
+      "python_solution": "def length_of_longest_substring(s):\n    left = 0\n    seen = {}\n    best = 0\n\n    for right, ch in enumerate(s):\n        if ch in seen and seen[ch] >= left:\n            left = seen[ch] + 1\n        seen[ch] = right\n        best = max(best, right - left + 1)\n\n    return best\n\nprint(length_of_longest_substring('abcabcbb'))  # 3"
+    },
+    {
+      "id": "dsa-int-02",
+      "title": "Binary Tree Level Order Traversal",
+      "pattern": "Breadth-First Search",
+      "level": "Intermediate",
+      "statement": "Given the root of a binary tree, return the nodes level by level in a list of lists.",
+      "approach": "Use a queue to process nodes breadth-first. Capture each level as a list and append children to the queue.",
+      "python_solution": "from collections import deque\n\nclass TreeNode:\n    def __init__(self, val=0, left=None, right=None):\n        self.val = val\n        self.left = left\n        self.right = right\n\ndef level_order(root):\n    if not root:\n        return []\n\n    q = deque([root])\n    result = []\n\n    while q:\n        level = []\n        for _ in range(len(q)):\n            node = q.popleft()\n            level.append(node.val)\n            if node.left:\n                q.append(node.left)\n            if node.right:\n                q.append(node.right)\n        result.append(level)\n\n    return result"
+    },
+    {
+      "id": "dsa-int-03",
+      "title": "Maximum Subarray",
+      "pattern": "Kadane's Algorithm",
+      "level": "Intermediate",
+      "statement": "Find the contiguous subarray which has the maximum sum and return the sum.",
+      "approach": "Track the current running sum and best sum. Reset when the running total becomes negative because a fresh start is more optimal.",
+      "python_solution": "def max_subarray(nums):\n    current = best = nums[0]\n    for num in nums[1:]:\n        current = max(num, current + num)\n        best = max(best, current)\n    return best\n\nprint(max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))  # 6"
+    },
+    {
+      "id": "dsa-int-04",
+      "title": "Top K Frequent Elements",
+      "pattern": "Heap / Priority Queue",
+      "level": "Intermediate",
+      "statement": "Given a non-empty array of integers and integer k, return the k most frequent elements.",
+      "approach": "Count frequencies using a hashmap, then use a min-heap to keep only the k most frequent elements.",
+      "python_solution": "import heapq\n\ndef top_k_frequent(nums, k):\n    counts = {}\n    for num in nums:\n        counts[num] = counts.get(num, 0) + 1\n\n    heap = []\n    for num, freq in counts.items():\n        heapq.heappush(heap, (freq, num))\n        if len(heap) > k:\n            heapq.heappop(heap)\n\n    return [num for _, num in heap]\n\nprint(top_k_frequent([1, 1, 1, 2, 2, 3], 2))"
+    },
+    {
+      "id": "dsa-adv-01",
+      "title": "Trapping Rain Water",
+      "pattern": "Two Pointers",
+      "level": "Advanced",
+      "statement": "Given n non-negative integers representing an elevation map, compute how much water can be trapped after raining.",
+      "approach": "Use two pointers from left and right sides. Track the maximum height seen so far from each side and compute trapped water based on the lower boundary.",
+      "python_solution": "def trap(height):\n    left, right = 0, len(height) - 1\n    left_max = right_max = 0\n    trapped = 0\n\n    while left < right:\n        if height[left] <= height[right]:\n            if height[left] >= left_max:\n                left_max = height[left]\n            else:\n                trapped += left_max - height[left]\n            left += 1\n        else:\n            if height[right] >= right_max:\n                right_max = height[right]\n            else:\n                trapped += right_max - height[right]\n            right -= 1\n\n    return trapped\n\nprint(trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))  # 6"
+    },
+    {
+      "id": "dsa-adv-02",
+      "title": "Word Ladder",
+      "pattern": "Breadth-First Search",
+      "level": "Advanced",
+      "statement": "Given two words, beginWord and endWord, and a dictionary wordList, return the length of the shortest transformation sequence from beginWord to endWord.",
+      "approach": "Use a BFS queue to explore one-letter transformations. Visit each word by maintaining the shortest distance and preventing revisits.",
+      "python_solution": "from collections import deque\n\ndef ladder_length(begin_word, end_word, word_list):\n    word_set = set(word_list)\n    if end_word not in word_set:\n        return 0\n\n    queue = deque([(begin_word, 1)])\n    while queue:\n        word, steps = queue.popleft()\n        if word == end_word:\n            return steps\n\n        for i in range(len(word)):\n            for ch in 'abcdefghijklmnopqrstuvwxyz':\n                new_word = word[:i] + ch + word[i+1:]\n                if new_word in word_set and new_word != word:\n                    word_set.remove(new_word)\n                    queue.append((new_word, steps + 1))\n\n    return 0\n\nprint(ladder_length('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']))  # 5"
+    }
+  ],
+  "youtube_resources": [
+    {
+      "id": "video-beg-01",
+      "title": "DBMS in One Shot",
+      "category": "DBMS",
+      "topic": "Database Fundamentals",
+      "level": "Beginner",
+      "url": "https://www.youtube.com/watch?v=7S_tz1z_5bA",
+      "description": "Conceptual overview of DBMS basics, ER models, normalization, and SQL fundamentals."
+    },
+    {
+      "id": "video-beg-02",
+      "title": "Operating System Concepts Crash Course",
+      "category": "OS",
+      "topic": "Process Scheduling",
+      "level": "Beginner",
+      "url": "https://www.youtube.com/watch?v=vBURTt97EkA",
+      "description": "A focused review of processes, threads, scheduling, deadlocks, and memory management."
+    },
+    {
+      "id": "video-beg-03",
+      "title": "Computer Networks Full Course",
+      "category": "Computer Networks",
+      "topic": "Networking Basics",
+      "level": "Beginner",
+      "url": "https://www.youtube.com/watch?v=IPvYjXCsTg8",
+      "description": "A well-structured walkthrough of OSI, TCP/IP, routing, and networking fundamentals."
+    },
+    {
+      "id": "video-int-01",
+      "title": "Data Structures and Algorithms Crash Course",
+      "category": "DSA",
+      "topic": "Arrays and Strings",
+      "level": "Intermediate",
+      "url": "https://www.youtube.com/watch?v=RBSGKlAvoiM",
+      "description": "A quick but high-value review of array, string, and algorithmic thinking patterns used in placement interviews."
+    },
+    {
+      "id": "video-int-02",
+      "title": "Hashing and Maps Explained",
+      "category": "DSA",
+      "topic": "Hashing",
+      "level": "Intermediate",
+      "url": "https://www.youtube.com/watch?v=2Ti5yvumFTU",
+      "description": "Explains hash tables, dictionary operations, and how to use maps to optimize interview problems."
+    },
+    {
+      "id": "video-int-03",
+      "title": "Recursion and Backtracking Fundamentals",
+      "category": "DSA",
+      "topic": "Recursion",
+      "level": "Intermediate",
+      "url": "https://www.youtube.com/watch?v=KQ6JHfXl_g0",
+      "description": "A clear introduction to recursion, stack frames, and backtracking for coding rounds."
+    },
+    {
+      "id": "video-adv-01",
+      "title": "Advanced DBMS Interview Concepts",
+      "category": "DBMS",
+      "topic": "Indexes and Transactions",
+      "level": "Advanced",
+      "url": "https://www.youtube.com/watch?v=4J8J7_Jd-Jc",
+      "description": "Covers normalization trade-offs, indexing strategies, transactions, and database optimization."
+    },
+    {
+      "id": "video-adv-02",
+      "title": "Operating System Memory & Scheduling Deep Dive",
+      "category": "OS",
+      "topic": "Scheduling and Memory",
+      "level": "Advanced",
+      "url": "https://www.youtube.com/watch?v=bkSWJJZNgf8",
+      "description": "Explores memory management, paging, CPU scheduling, and OS deep concepts for advanced interviews."
+    }
+  ]
+}

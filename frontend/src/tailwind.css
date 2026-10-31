@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent: #aa3bff;
+  --color-accent-dark: #c084fc;
+  --color-text: #6b6375;
+  --color-text-heading: #08060d;
+  --color-surface: #fff;
+  --color-border: #e5e4e7;
+  --color-code-bg: #f4f3ec;
+
+  --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-heading: system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, Consolas, monospace;
+}
