@@ -33,7 +33,7 @@ app = FastAPI(
     version="1.0.0",
 )
 
-default_cors_origins = "http://localhost:5173,http://127.0.0.1:5173,http://localhost:5175,http://127.0.0.1:5175"
+default_cors_origins = "hireai018.vercel.app,hireai-git-main-raibagiyash-1018s-projects.vercel.app,hireai-bvgzgos5e-raibagiyash-1018s-projects.vercel.app"
 cors_origins = [
     origin.strip().rstrip("/")
     for origin in os.getenv("CORS_ORIGINS", default_cors_origins).split(",")
