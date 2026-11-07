@@ -40,8 +40,11 @@ router = APIRouter(prefix="/api")
 logger = logging.getLogger("hireai.jobs")
 ALLOWED_ROLES = {"student", "recruiter"}
 FIREBASE_PROJECT_ID = os.getenv("FIREBASE_PROJECT_ID", "hire-ai-7f6f3")
-FIREBASE_SERVICE_ACCOUNT_PATH = (
-    Path(__file__).resolve().parent / "firebase-service-account.json"
+FIREBASE_SERVICE_ACCOUNT_PATH = Path(
+    os.getenv(
+        "FIREBASE_SERVICE_ACCOUNT_PATH",
+        str(Path(__file__).resolve().parent / "firebase-service-account.json"),
+    )
 )
 
 try:
