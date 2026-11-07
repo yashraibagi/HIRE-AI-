@@ -2,11 +2,13 @@ import logging
 import os
 from datetime import datetime, timezone
 from typing import Optional
+import time
 
 from fastapi import APIRouter, BackgroundTasks, Depends, File, Form, Header, HTTPException, UploadFile
 from fastapi.responses import FileResponse
-from google.auth.transport.requests import Request as GoogleAuthRequest
-from google.oauth2 import id_token
+from pathlib import Path
+import firebase_admin
+from firebase_admin import auth, credentials
 from sqlalchemy import case, func, or_, select
 from sqlalchemy.orm import Session, joinedload
 
@@ -38,11 +40,23 @@ router = APIRouter(prefix="/api")
 logger = logging.getLogger("hireai.jobs")
 ALLOWED_ROLES = {"student", "recruiter"}
 FIREBASE_PROJECT_ID = os.getenv("FIREBASE_PROJECT_ID", "hire-ai-7f6f3")
+FIREBASE_SERVICE_ACCOUNT_PATH = (
+    Path(__file__).resolve().parent / "firebase-service-account.json"
+)
+
+try:
+    firebase_app = firebase_admin.get_app()
+except ValueError:
+    firebase_app = firebase_admin.initialize_app(
+        credentials.Certificate(str(FIREBASE_SERVICE_ACCOUNT_PATH))
+    )
 RECRUITER_EMAILS = {
     email.strip().lower()
     for email in os.getenv("RECRUITER_EMAILS", "").split(",")
     if email.strip()
 }
+
+
 
 
 def current_user(
@@ -52,26 +66,53 @@ def current_user(
     x_user_role: str = Header(default="student"),
 ) -> User:
     """Verify Firebase identity and resolve it into a local user row."""
+
     if not authorization or not authorization.lower().startswith("bearer "):
-        raise HTTPException(status_code=401, detail="Sign in before using this endpoint.")
-    token = authorization.split(" ", 1)[1].strip()
-    try:
-        claims = id_token.verify_firebase_token(
-            token,
-            GoogleAuthRequest(),
-            audience=FIREBASE_PROJECT_ID,
+        raise HTTPException(
+            status_code=401,
+            detail="Sign in before using this endpoint.",
         )
+
+    token = authorization.split(" ", 1)[1].strip()
+
+    try:
+        auth_start = time.perf_counter()
+
+        claims = auth.verify_id_token(
+            token,
+            app=firebase_app,
+        )
+
+        logger.info(
+            "FIREBASE VERIFICATION: %.3fs",
+            time.perf_counter() - auth_start,
+        )
+
     except Exception as exc:
-        raise HTTPException(status_code=401, detail="Invalid or expired Firebase sign-in token.") from exc
-    user_id = claims.get("user_id") or claims.get("sub")
+        logger.exception("Firebase token verification failed")
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid or expired Firebase sign-in token.",
+        ) from exc
+
+    user_id = claims.get("uid") or claims.get("user_id") or claims.get("sub")
+
     if not user_id:
-        raise HTTPException(status_code=401, detail="Firebase token does not contain a user ID.")
+        raise HTTPException(
+            status_code=401,
+            detail="Firebase token does not contain a user ID.",
+        )
 
     requested_role = x_user_role.strip().lower()
+
     if requested_role not in ALLOWED_ROLES:
-        raise HTTPException(status_code=400, detail="Role must be student or recruiter.")
+        raise HTTPException(
+            status_code=400,
+            detail="Role must be student or recruiter.",
+        )
 
     user = db.get(User, user_id)
+
     if user is None:
         user = User(
             id=user_id,
@@ -82,22 +123,38 @@ def current_user(
         db.add(user)
         db.commit()
         db.refresh(user)
+
     else:
         if user.role != requested_role:
-            raise HTTPException(status_code=403, detail=f"This account is registered as {user.role}.")
-        user.name = x_user_name.strip()[:200] or user.name
-        user.email = str(claims.get("email") or user.email)[:320]
-        db.commit()
+            raise HTTPException(
+                status_code=403,
+                detail=f"This account is registered as {user.role}.",
+            )
+
+        new_name = x_user_name.strip()[:200] or user.name
+        new_email = str(claims.get("email") or user.email)
+
+        changed = False
+
+        if user.name != new_name:
+            user.name = new_name
+            changed = True
+
+        if user.email != new_email:
+            user.email = new_email
+            changed = True
+
+        if changed:
+            db.commit()
     return user
+
 
 
 def require_role(user: User, role: str) -> None:
     if user.role != role:
-        raise HTTPException(status_code=403, detail=f"Only {role}s can use this endpoint.")
-    if role == "recruiter" and user.email.lower() not in RECRUITER_EMAILS:
         raise HTTPException(
             status_code=403,
-            detail="Recruiter access is not approved for this account. Ask an administrator to add your email to RECRUITER_EMAILS.",
+            detail=f"Only {role}s can use this endpoint.",
         )
 
 
@@ -435,47 +492,35 @@ def list_my_applications(
     db: Session = Depends(get_db),
     user: User = Depends(current_user),
 ) -> list[dict]:
+    import time
+
+    start = time.perf_counter()
+
     require_role(user, "student")
+
+    query_start = time.perf_counter()
+
     applications = db.scalars(
         select(Application)
         .options(joinedload(Application.student), joinedload(Application.job))
         .where(Application.student_id == user.id)
         .order_by(Application.applied_at.desc())
     ).all()
-    return [application_output(application) for application in applications]
 
+    query_time = time.perf_counter() - query_start
 
-@router.get("/resumes/{resume_id}")
-def preview_resume(
-    resume_id: str,
-    db: Session = Depends(get_db),
-    user: User = Depends(current_user),
-) -> FileResponse:
-    resume_url = f"/api/resumes/{resume_id}"
-    is_profile_resume = user.profile_resume_url == resume_url
-    application = db.scalar(
-        select(Application)
-        .join(Job, Application.job_id == Job.id)
-        .where(
-            Application.resume_file_url == resume_url,
-            or_(Application.student_id == user.id, Job.recruiter_id == user.id),
-        )
-        .limit(1)
+    result = [application_output(application) for application in applications]
+
+    total_time = time.perf_counter() - start
+
+    logger.info(
+        "APPLICATIONS DEBUG: database=%.3fs total=%.3fs count=%s",
+        query_time,
+        total_time,
+        len(result),
     )
-    if not is_profile_resume and application is None:
-        raise HTTPException(status_code=404, detail="Resume not found.")
-    if (
-        application is not None
-        and application.student_id != user.id
-        and (user.preferences or {}).get("blind_screening")
-        and application.status != "Shortlisted"
-    ):
-        raise HTTPException(status_code=404, detail="Resume not found.")
-    return FileResponse(
-        get_resume_path(resume_id),
-        media_type="application/pdf",
-        headers={"Content-Disposition": "inline"},
-    )
+
+    return result
 
 
 @router.get("/jobs/{job_id}/applications", response_model=list[ApplicationOut])

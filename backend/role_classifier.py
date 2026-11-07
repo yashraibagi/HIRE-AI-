@@ -206,3 +206,5 @@ def predict_role(resume_text: str):
     best_idx = int(np.argmax(proba))
     return str(classes[best_idx]), round(float(proba[best_idx]), 3)
     print("role_classifier loaded")
+
+    

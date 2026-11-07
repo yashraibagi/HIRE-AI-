@@ -48,16 +48,16 @@ const dateLabel = (value) => {
 
 function Toggle({ checked, onChange, label, description }) {
   return (
-    <label className="flex cursor-pointer items-start justify-between gap-4 rounded-xl border border-slate-200 p-4">
+    <label className="flex cursor-pointer items-start justify-between gap-4 rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 backdrop-blur-md transition-colors hover:bg-zinc-900/60">
       <span>
-        <span className="block text-sm font-medium text-slate-900">{label}</span>
-        {description && <span className="mt-1 block text-xs leading-5 text-slate-500">{description}</span>}
+        <span className="block text-sm font-medium text-zinc-100">{label}</span>
+        {description && <span className="mt-1 block text-xs leading-5 font-light text-zinc-400">{description}</span>}
       </span>
       <input
         type="checkbox"
         checked={checked}
         onChange={(event) => onChange(event.target.checked)}
-        className="mt-0.5 h-4 w-4 shrink-0 accent-indigo-600"
+        className="mt-0.5 h-4 w-4 shrink-0 accent-zinc-100 bg-zinc-950 border-zinc-700 rounded"
       />
     </label>
   );
@@ -65,14 +65,14 @@ function Toggle({ checked, onChange, label, description }) {
 
 function Field({ label, value, onChange, placeholder, type = 'text', ...props }) {
   return (
-    <label className="block space-y-1.5 text-sm font-medium text-slate-700">
+    <label className="block space-y-1.5 text-sm font-medium text-zinc-200">
       {label}
       <input
         type={type}
         value={value ?? ''}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 font-normal outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+        className="w-full rounded-xl border border-zinc-800 bg-zinc-950/70 px-3.5 py-2.5 font-normal text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-zinc-600 focus:bg-zinc-900 focus:ring-2 focus:ring-zinc-700"
         {...props}
       />
     </label>
@@ -308,7 +308,7 @@ export default function ProfileModal({
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-80 flex items-center justify-center overflow-y-auto bg-slate-950/45 p-3 sm:p-6"
+          className="fixed inset-0 z-80 flex items-center justify-center overflow-y-auto bg-zinc-950/80 backdrop-blur-sm p-3 sm:p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -322,24 +322,24 @@ export default function ProfileModal({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.98 }}
             transition={{ duration: 0.18 }}
-            className="flex max-h-[calc(100dvh-1.5rem)] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl sm:max-h-[calc(100dvh-3rem)]"
+            className="flex max-h-[calc(100dvh-1.5rem)] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 shadow-2xl text-zinc-100 sm:max-h-[calc(100dvh-3rem)] backdrop-blur-xl"
           >
-            <header className="flex items-start justify-between gap-4 border-b border-slate-100 px-5 py-4 sm:px-7">
+            <header className="flex items-start justify-between gap-4 border-b border-zinc-800 px-5 py-4 sm:px-7">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-600">Account</p>
-                <h2 id="profile-dialog-title" className="mt-1 text-xl font-bold text-slate-950">Profile & settings</h2>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">Account</p>
+                <h2 id="profile-dialog-title" className="mt-1 text-xl font-bold text-zinc-100">Profile & settings</h2>
               </div>
-              <button type="button" onClick={onClose} aria-label="Close profile settings" className="rounded-lg p-2 text-slate-500 transition hover:bg-slate-100"><X size={19} /></button>
+              <button type="button" onClick={onClose} aria-label="Close profile settings" className="rounded-lg p-2 text-zinc-400 transition hover:bg-zinc-900 hover:text-zinc-100"><X size={19} /></button>
             </header>
 
-            <nav aria-label="Profile settings" className="flex gap-1 overflow-x-auto border-b border-slate-100 px-4 pt-2 sm:px-6">
+            <nav aria-label="Profile settings" className="flex gap-1 overflow-x-auto border-b border-zinc-800 px-4 pt-2 sm:px-6 bg-zinc-950/50">
               {tabs.map(({ id, label, icon: Icon }) => (
                 <button
                   key={id}
                   type="button"
                   aria-current={activeTab === id ? 'page' : undefined}
                   onClick={() => { setActiveTab(id); setNotice(''); setError(''); }}
-                  className={`inline-flex shrink-0 items-center gap-2 border-b-2 px-3 py-3 text-sm font-medium transition ${activeTab === id ? 'border-indigo-600 text-indigo-700' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
+                  className={`inline-flex shrink-0 items-center gap-2 border-b-2 px-3 py-3 text-sm font-medium transition ${activeTab === id ? 'border-zinc-100 text-zinc-100 font-semibold' : 'border-transparent text-zinc-400 hover:text-zinc-200'}`}
                 >
                   <Icon size={16} />{label}
                 </button>
@@ -347,29 +347,29 @@ export default function ProfileModal({
             </nav>
 
             <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-7">
-              {notice && <p role="status" className="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-700">{notice}</p>}
-              {error && <p role="alert" className="mb-4 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">{error}</p>}
+              {notice && <p role="status" className="mb-4 rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-200">{notice}</p>}
+              {error && <p role="alert" className="mb-4 rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-200">{error}</p>}
 
               {activeTab === 'personal' && (
                 <form onSubmit={handleProfileSave} className="space-y-5">
-                  <div className="flex items-center gap-4 rounded-xl bg-slate-50 p-4">
-                    <div className="grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-2xl bg-indigo-100 text-lg font-bold text-indigo-700">
+                  <div className="flex items-center gap-4 rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 backdrop-blur-md">
+                    <div className="grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-2xl border border-zinc-700 bg-zinc-800 text-lg font-bold text-zinc-100">
                       {avatarSrc ? <img src={avatarSrc} alt="Profile" className="h-full w-full object-cover" /> : (profileForm.name || profile?.email || 'U').split(/\s+/).map((part) => part[0]).join('').slice(0, 2).toUpperCase()}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="font-semibold text-slate-900">Profile photo</p>
-                      <p className="mt-1 text-xs text-slate-500">PNG, JPEG, or WebP · up to 2 MB</p>
+                      <p className="font-semibold text-zinc-100">Profile photo</p>
+                      <p className="mt-1 text-xs font-light text-zinc-400">PNG, JPEG, or WebP · up to 2 MB</p>
                     </div>
                     <input ref={avatarInput} type="file" accept="image/png,image/jpeg,image/webp" hidden onChange={handleAvatarChange} />
-                    <button type="button" disabled={avatarSaving} onClick={() => avatarInput.current?.click()} className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50">
+                    <button type="button" disabled={avatarSaving} onClick={() => avatarInput.current?.click()} className="inline-flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/60 px-3.5 py-2 text-sm font-medium text-zinc-200 hover:bg-zinc-800 hover:text-zinc-100 transition-colors disabled:opacity-50">
                       {avatarSaving ? <LoaderCircle size={15} className="animate-spin" /> : <ImagePlus size={15} />} Change
                     </button>
                   </div>
 
                   <div className="grid gap-4 sm:grid-cols-2">
                     <Field label="Full name" value={profileForm.name} onChange={(value) => changeProfile('name', value)} required />
-                    <label className="block space-y-1.5 text-sm font-medium text-slate-700">Contact email
-                      <div className="relative"><Mail size={15} className="absolute left-3 top-3 text-slate-400" /><input readOnly value={profile?.email || authUser?.email || ''} className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2.5 pl-9 pr-3 font-normal text-slate-500" /></div>
+                    <label className="block space-y-1.5 text-sm font-medium text-zinc-200">Contact email
+                      <div className="relative"><Mail size={15} className="absolute left-3.5 top-3 text-zinc-500" /><input readOnly value={profile?.email || authUser?.email || ''} className="w-full rounded-xl border border-zinc-800 bg-zinc-900/40 py-2.5 pl-9 pr-3 font-normal text-zinc-400 outline-none" /></div>
                     </label>
                     <Field label="Professional title" value={profileForm.professional_title} onChange={(value) => changeProfile('professional_title', value)} placeholder={isRecruiter ? 'Talent Acquisition Manager' : 'Software Engineering Student'} />
                     <Field label="Phone" type="tel" value={profileForm.phone} onChange={(value) => changeProfile('phone', value)} placeholder="Add a contact number" />
@@ -387,12 +387,12 @@ export default function ProfileModal({
                     <Field label="Portfolio URL" type="url" value={profileForm.portfolio_url} onChange={(value) => changeProfile('portfolio_url', value)} placeholder="https://..." />
                   </div>
                   {isRecruiter && (
-                    <label className="block space-y-1.5 text-sm font-medium text-slate-700">Company bio
-                      <textarea rows={3} maxLength={2000} value={profileForm.company_bio} onChange={(event) => changeProfile('company_bio', event.target.value)} className="w-full rounded-lg border border-slate-200 px-3 py-2.5 font-normal outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" />
+                    <label className="block space-y-1.5 text-sm font-medium text-zinc-200">Company bio
+                      <textarea rows={3} maxLength={2000} value={profileForm.company_bio} onChange={(event) => changeProfile('company_bio', event.target.value)} className="w-full rounded-xl border border-zinc-800 bg-zinc-950/70 px-3.5 py-2.5 font-normal text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-zinc-600 focus:bg-zinc-900 focus:ring-2 focus:ring-zinc-700 resize-none" />
                     </label>
                   )}
-                  <div className="flex justify-end border-t border-slate-100 pt-4">
-                    <button type="submit" disabled={saving} className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 disabled:opacity-50">
+                  <div className="flex justify-end border-t border-zinc-800 pt-4">
+                    <button type="submit" disabled={saving} className="inline-flex items-center gap-2 rounded-xl bg-zinc-100 px-4 py-2.5 text-sm font-medium text-zinc-950 transition hover:bg-white disabled:opacity-50 shadow-sm">
                       {saving ? <LoaderCircle size={16} className="animate-spin" /> : <Check size={16} />} Save details
                     </button>
                   </div>
@@ -403,18 +403,18 @@ export default function ProfileModal({
                 <form onSubmit={handlePreferencesSave} className="space-y-5">
                   {isRecruiter ? (
                     <>
-                      <section className="flex flex-wrap items-center gap-4 rounded-xl border border-slate-200 p-4">
-                        <div className="grid h-16 w-24 shrink-0 place-items-center overflow-hidden rounded-lg border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-400">
+                      <section className="flex flex-wrap items-center gap-4 rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 backdrop-blur-md">
+                        <div className="grid h-16 w-24 shrink-0 place-items-center overflow-hidden rounded-xl border border-zinc-700 bg-zinc-800 text-xs font-semibold text-zinc-400">
                           {companyLogoSrc ? <img src={companyLogoSrc} alt="Company logo" className="h-full w-full object-contain p-1" /> : 'No logo'}
                         </div>
-                        <div className="min-w-0 flex-1"><h3 className="text-sm font-semibold text-slate-900">Company branding</h3><p className="mt-1 text-xs text-slate-500">Upload a logo used for your recruiter profile. PNG, JPEG, or WebP up to 2 MB.</p></div>
+                        <div className="min-w-0 flex-1"><h3 className="text-sm font-semibold text-zinc-100">Company branding</h3><p className="mt-1 text-xs font-light text-zinc-400">Upload a logo used for your recruiter profile. PNG, JPEG, or WebP up to 2 MB.</p></div>
                         <input ref={companyLogoInput} type="file" accept="image/png,image/jpeg,image/webp" hidden onChange={handleCompanyLogoChange} />
-                        <button type="button" disabled={companyLogoSaving} onClick={() => companyLogoInput.current?.click()} className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50">{companyLogoSaving ? <LoaderCircle size={15} className="animate-spin" /> : <ImagePlus size={15} />}{profile?.company_logo_url ? 'Replace logo' : 'Upload logo'}</button>
+                        <button type="button" disabled={companyLogoSaving} onClick={() => companyLogoInput.current?.click()} className="inline-flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/65 px-3.5 py-2 text-sm font-medium text-zinc-200 hover:bg-zinc-800 hover:text-zinc-100 transition-colors disabled:opacity-50">{companyLogoSaving ? <LoaderCircle size={15} className="animate-spin" /> : <ImagePlus size={15} />}{profile?.company_logo_url ? 'Replace logo' : 'Upload logo'}</button>
                       </section>
                       <Field label="Default ATS threshold for new jobs (%)" type="number" min="0" max="100" value={preferences.default_ats_threshold} onChange={(value) => changePreference('default_ats_threshold', value)} />
-                      <label className="block space-y-1.5 text-sm font-medium text-slate-700">Automated shortlist email template
-                        <textarea rows={7} maxLength={6000} value={preferences.shortlist_email_template} onChange={(event) => changePreference('shortlist_email_template', event.target.value)} placeholder={'Hi {candidate_name},\n\nYour application for {role} has been shortlisted.\n\nBest,\n{recruiter_name}'} className="w-full rounded-lg border border-slate-200 px-3 py-2.5 font-mono text-sm font-normal leading-6 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" />
-                        <span className="block text-xs font-normal text-slate-500">Available placeholders: {'{candidate_name}'}, {'{role}'}, {'{recruiter_name}'}, {'{match_score}'}</span>
+                      <label className="block space-y-1.5 text-sm font-medium text-zinc-200">Automated shortlist email template
+                        <textarea rows={7} maxLength={6000} value={preferences.shortlist_email_template} onChange={(event) => changePreference('shortlist_email_template', event.target.value)} placeholder={'Hi {candidate_name},\n\nYour application for {role} has been shortlisted.\n\nBest,\n{recruiter_name}'} className="w-full rounded-xl border border-zinc-800 bg-zinc-950/70 px-3.5 py-2.5 font-mono text-sm font-normal leading-6 text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-zinc-600 focus:bg-zinc-900 focus:ring-2 focus:ring-zinc-700" />
+                        <span className="block text-xs font-light text-zinc-400">Available placeholders: {'{candidate_name}'}, {'{role}'}, {'{recruiter_name}'}, {'{match_score}'}</span>
                       </label>
                       <Toggle checked={preferences.blind_screening} onChange={(value) => changePreference('blind_screening', value)} label="Blind screening" description="Hide candidate names, email addresses, and resume filenames until shortlisted." />
                     </>
@@ -422,27 +422,27 @@ export default function ProfileModal({
                     <>
                       <Field label="Target job roles" value={preferences.target_job_roles} onChange={(value) => changePreference('target_job_roles', value)} placeholder="Frontend Developer, Data Analyst" />
                       <fieldset className="space-y-2">
-                        <legend className="text-sm font-medium text-slate-700">Preferred job types</legend>
+                        <legend className="text-sm font-medium text-zinc-200">Preferred job types</legend>
                         <div className="flex flex-wrap gap-2">
                           {jobTypes.map((jobType) => {
                             const checked = preferences.preferred_job_types?.includes(jobType);
-                            return <label key={jobType} className={`inline-flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm ${checked ? 'border-indigo-200 bg-indigo-50 text-indigo-700' : 'border-slate-200 text-slate-600'}`}><input type="checkbox" checked={checked} onChange={() => toggleJobType(jobType)} className="accent-indigo-600" />{jobType}</label>;
+                            return <label key={jobType} className={`inline-flex cursor-pointer items-center gap-2 rounded-xl border px-3.5 py-2 text-sm transition-colors ${checked ? 'border-zinc-700 bg-zinc-800 text-zinc-100 font-medium' : 'border-zinc-800 bg-zinc-900/40 text-zinc-300 hover:bg-zinc-900 hover:text-zinc-100'}`}><input type="checkbox" checked={checked} onChange={() => toggleJobType(jobType)} className="accent-zinc-100 bg-zinc-950 border-zinc-700 rounded" />{jobType}</label>;
                           })}
                         </div>
                       </fieldset>
                       <Field label="Primary skills (comma-separated)" value={preferences.primary_skills} onChange={(value) => changePreference('primary_skills', value)} placeholder="Python, React, SQL" />
-                      <section className="space-y-3 rounded-xl border border-slate-200 p-4">
-                        <div className="flex items-start gap-3"><FileText size={19} className="mt-0.5 text-indigo-600" /><div><h3 className="text-sm font-semibold text-slate-900">Master resume</h3><p className="mt-1 text-xs text-slate-500">Use this PDF as your default when applying.</p></div></div>
+                      <section className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 backdrop-blur-md">
+                        <div className="flex items-start gap-3"><FileText size={19} className="mt-0.5 text-zinc-300" /><div><h3 className="text-sm font-semibold text-zinc-100">Master resume</h3><p className="mt-1 text-xs font-light text-zinc-400">Use this PDF as your default when applying.</p></div></div>
                         {profile?.profile_resume_url ? (
-                          <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg bg-slate-50 p-3"><div><p className="max-w-xs truncate text-sm font-medium text-slate-800">{profile.profile_resume_name}</p><p className="mt-1 text-xs text-slate-500">Last uploaded {dateLabel(profile.profile_resume_updated_at)}</p></div><button type="button" onClick={handleResumePreview} className="text-sm font-semibold text-indigo-700 hover:text-indigo-900">Preview</button></div>
-                        ) : <p className="text-sm text-slate-500">No master resume uploaded.</p>}
+                          <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-zinc-800 bg-zinc-950/60 p-3"><div><p className="max-w-xs truncate text-sm font-medium text-zinc-200">{profile.profile_resume_name}</p><p className="mt-1 text-xs font-light text-zinc-400">Last uploaded {dateLabel(profile.profile_resume_updated_at)}</p></div><button type="button" onClick={handleResumePreview} className="text-sm font-medium text-zinc-200 hover:text-white transition-colors">Preview</button></div>
+                        ) : <p className="text-sm font-light text-zinc-400">No master resume uploaded.</p>}
                         <input ref={resumeInput} type="file" accept="application/pdf,.pdf" hidden onChange={handleResumeChange} />
-                        <button type="button" disabled={resumeSaving} onClick={() => resumeInput.current?.click()} className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50">{resumeSaving ? <LoaderCircle size={15} className="animate-spin" /> : <FileText size={15} />}{profile?.profile_resume_url ? 'Replace master resume' : 'Upload master resume'}</button>
+                        <button type="button" disabled={resumeSaving} onClick={() => resumeInput.current?.click()} className="inline-flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/60 px-3.5 py-2 text-sm font-medium text-zinc-200 hover:bg-zinc-800 hover:text-zinc-100 transition-colors disabled:opacity-50">{resumeSaving ? <LoaderCircle size={15} className="animate-spin" /> : <FileText size={15} />}{profile?.profile_resume_url ? 'Replace master resume' : 'Upload master resume'}</button>
                       </section>
                     </>
                   )}
-                  <div className="flex justify-end border-t border-slate-100 pt-4">
-                    <button type="submit" disabled={saving} className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 disabled:opacity-50">{saving ? <LoaderCircle size={16} className="animate-spin" /> : <Check size={16} />} Save preferences</button>
+                  <div className="flex justify-end border-t border-zinc-800 pt-4">
+                    <button type="submit" disabled={saving} className="inline-flex items-center gap-2 rounded-xl bg-zinc-100 px-4 py-2.5 text-sm font-medium text-zinc-950 transition hover:bg-white disabled:opacity-50 shadow-sm">{saving ? <LoaderCircle size={16} className="animate-spin" /> : <Check size={16} />} Save preferences</button>
                   </div>
                 </form>
               )}
@@ -450,17 +450,17 @@ export default function ProfileModal({
               {activeTab === 'security' && (
                 <div className="space-y-5">
                   <section className="space-y-3">
-                    <h3 className="text-sm font-semibold text-slate-900">Notifications</h3>
+                    <h3 className="text-sm font-semibold text-zinc-100">Notifications</h3>
                     {isRecruiter ? (
                       <Toggle checked={preferences.email_new_applicant_alerts} onChange={(value) => changePreference('email_new_applicant_alerts', value)} label="New applicant alerts" description="Email me when someone applies to one of my jobs." />
                     ) : (
                       <Toggle checked={preferences.email_shortlist_updates} onChange={(value) => changePreference('email_shortlist_updates', value)} label="Application status updates" description="Email me when a recruiter shortlists my application." />
                     )}
-                    <button type="button" disabled={saving} onClick={handlePreferencesSave} className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50">{saving ? <LoaderCircle size={15} className="animate-spin" /> : <Check size={15} />} Save notification settings</button>
+                    <button type="button" disabled={saving} onClick={handlePreferencesSave} className="inline-flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/60 px-3.5 py-2 text-sm font-medium text-zinc-200 hover:bg-zinc-800 hover:text-zinc-100 transition-colors disabled:opacity-50">{saving ? <LoaderCircle size={15} className="animate-spin" /> : <Check size={15} />} Save notification settings</button>
                   </section>
 
-                  <section className="space-y-3 border-t border-slate-100 pt-5">
-                    <div className="flex items-center gap-2"><LockKeyhole size={17} className="text-indigo-600" /><h3 className="text-sm font-semibold text-slate-900">Password</h3></div>
+                  <section className="space-y-3 border-t border-zinc-800 pt-5">
+                    <div className="flex items-center gap-2"><LockKeyhole size={17} className="text-zinc-300" /><h3 className="text-sm font-semibold text-zinc-100">Password</h3></div>
                     {authUser?.providerData?.some((provider) => provider.providerId === 'password') ? (
                       <form onSubmit={handlePasswordChange} className="space-y-3">
                         <Field label="Current password" type="password" autoComplete="current-password" value={passwordForm.current} onChange={(value) => setPasswordForm((current) => ({ ...current, current: value }))} required />
@@ -468,15 +468,15 @@ export default function ProfileModal({
                           <Field label="New password" type="password" autoComplete="new-password" minLength={8} value={passwordForm.next} onChange={(value) => setPasswordForm((current) => ({ ...current, next: value }))} required />
                           <Field label="Confirm new password" type="password" autoComplete="new-password" minLength={8} value={passwordForm.confirm} onChange={(value) => setPasswordForm((current) => ({ ...current, confirm: value }))} required />
                         </div>
-                        <button type="submit" disabled={passwordSaving} className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-700 disabled:opacity-50">{passwordSaving ? <LoaderCircle size={15} className="animate-spin" /> : <LockKeyhole size={15} />} Update password</button>
+                        <button type="submit" disabled={passwordSaving} className="inline-flex items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-800 px-3.5 py-2 text-sm font-medium text-zinc-100 hover:bg-zinc-700 transition-colors disabled:opacity-50 shadow-sm">{passwordSaving ? <LoaderCircle size={15} className="animate-spin" /> : <LockKeyhole size={15} />} Update password</button>
                       </form>
-                    ) : <p className="rounded-lg bg-slate-50 p-3 text-sm leading-6 text-slate-600">This account signs in with an external provider. Manage its password with that provider.</p>}
+                    ) : <p className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-3 text-sm leading-6 font-light text-zinc-300">This account signs in with an external provider. Manage its password with that provider.</p>}
                   </section>
 
-                  <section className="rounded-xl border border-slate-200 p-4">
-                    <h3 className="text-sm font-semibold text-slate-900">Current session</h3>
-                    <p className="mt-2 text-sm text-slate-600">Signed in with {authUser?.providerData?.[0]?.providerId || 'Firebase Authentication'}</p>
-                    <p className="mt-1 text-xs text-slate-500">Last sign-in: {dateLabel(authUser?.metadata?.lastSignInTime)}</p>
+                  <section className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 backdrop-blur-md">
+                    <h3 className="text-sm font-semibold text-zinc-100">Current session</h3>
+                    <p className="mt-2 text-sm font-light text-zinc-300">Signed in with {authUser?.providerData?.[0]?.providerId || 'Firebase Authentication'}</p>
+                    <p className="mt-1 text-xs font-light text-zinc-400">Last sign-in: {dateLabel(authUser?.metadata?.lastSignInTime)}</p>
                   </section>
                 </div>
               )}

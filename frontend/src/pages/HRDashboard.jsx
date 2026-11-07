@@ -16,16 +16,16 @@ export default function HRDashboard() {
   const [activeNav, setActiveNav] = useState('jobs');
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-zinc-950 text-zinc-100">
       <motion.aside
         initial={{ x: -240 }}
         animate={{ x: 0 }}
         transition={{ duration: 0.3 }}
-        className="sticky top-0 flex h-screen w-64 shrink-0 flex-col border-r border-slate-200 bg-white text-slate-700 shadow-sm max-md:w-[72px]"
+        className="sticky top-0 flex h-screen w-64 shrink-0 flex-col border-r border-zinc-800 bg-zinc-950 text-zinc-300 shadow-2xl max-md:w-[72px]"
       >
-        <div className="border-b border-slate-100 px-6 py-5 max-md:px-3">
-          <h1 className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-2xl font-bold tracking-tight text-transparent max-md:text-center max-md:text-lg">HireAI</h1>
-          <p className="mt-1 text-xs font-medium uppercase tracking-wider text-slate-500">Recruiter workspace</p>
+        <div className="border-b border-zinc-800 px-6 py-5 max-md:px-3">
+          <h1 className="text-2xl font-bold tracking-tight text-zinc-100 max-md:text-center max-md:text-lg">HireAI</h1>
+          <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-400">Recruiter workspace</p>
         </div>
 
         <nav aria-label="Recruiter dashboard" className="flex-1 space-y-1.5 p-3 max-md:px-2">
@@ -37,22 +37,22 @@ export default function HRDashboard() {
               aria-current={activeNav === id ? 'page' : undefined}
               className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left font-medium transition max-md:justify-center max-md:px-2 ${
                 activeNav === id
-                  ? 'bg-indigo-50 text-indigo-700 ring-1 ring-inset ring-indigo-100'
-                  : 'text-slate-600 hover:bg-slate-50 hover:text-slate-950'
+                  ? 'bg-zinc-800 text-zinc-100 border border-zinc-700 shadow-sm'
+                  : 'text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200'
               }`}
             >
-              <Icon size={20} />
+              <Icon size={20} className={activeNav === id ? 'text-zinc-100' : 'text-zinc-400'} />
               <span className="text-sm font-medium max-md:hidden">{label}</span>
             </button>
           ))}
         </nav>
 
-        <div className="border-t border-slate-100 p-4">
+        <div className="border-t border-zinc-800 p-4 bg-zinc-950">
           <ProfileButton />
         </div>
       </motion.aside>
 
-      <main className="min-w-0 flex-1 overflow-auto bg-slate-50">
+      <main className="min-w-0 flex-1 overflow-auto bg-zinc-950">
         <div className="p-6 md:p-8 xl:p-10">
           <AnimatePresence mode="wait">
             {activeNav === 'analytics' ? (

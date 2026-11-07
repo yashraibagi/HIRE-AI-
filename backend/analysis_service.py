@@ -16,7 +16,6 @@ def analyze_resume_bytes(file_bytes: bytes, job_description: str) -> dict:
             "total": len(match_report["jd_skills"]),
         },
     )
-    predicted_role, confidence = role_classifier.predict_role(resume_data["text"])
     gaps = skill_gap.analyze_gaps(
         match_report["matched_skills"], match_report["missing_skills"]
     )
@@ -24,8 +23,7 @@ def analyze_resume_bytes(file_bytes: bytes, job_description: str) -> dict:
         ats_score=ats_result["score"],
         missing_skills=match_report["missing_skills"],
         experience_years=resume_data["experience_years"],
-        predicted_role=predicted_role,
-        confidence=confidence,
+        
     )
     match_score = float(match_report["match_percent"])
     matched_skills = match_report["matched_skills"]
@@ -54,8 +52,6 @@ def analyze_resume_bytes(file_bytes: bytes, job_description: str) -> dict:
         "matched_skills": matched_skills,
         "missing_skills": gaps,
         "summary": summary,
-        "predicted_role": predicted_role,
-        "confidence": confidence,
         "experience_years": resume_data["experience_years"],
         "education": resume_data["education"],
         "recommendations": recommendations,

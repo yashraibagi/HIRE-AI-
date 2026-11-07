@@ -16,7 +16,10 @@ IS_SQLITE = DATABASE_URL.startswith("sqlite")
 engine = create_engine(
     DATABASE_URL,
     connect_args={"check_same_thread": False} if IS_SQLITE else {},
-    pool_pre_ping=True,
+    pool_pre_ping=False,
+    pool_size=5,
+    max_overflow=10,
+    pool_recycle=1800,
 )
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 

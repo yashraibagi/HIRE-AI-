@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Zap, FileText, Target, BriefcaseBusiness } from 'lucide-react';
+import { Zap, FileText, Target } from 'lucide-react';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -82,6 +82,8 @@ const LandingPage = () => {
       description: 'Advanced parsing and analysis of resumes using AI to extract key skills and experiences.',
       color: 'from-indigo-500/20 to-indigo-500/5',
       borderColor: 'border-indigo-500/30',
+      glow: 'group-hover:shadow-[0_0_20px_rgba(99,102,241,0.3)]',
+      iconColor: 'text-indigo-400',
     },
     {
       icon: Target,
@@ -89,6 +91,8 @@ const LandingPage = () => {
       description: 'Intelligent matching algorithm that connects candidates with perfect job opportunities.',
       color: 'from-emerald-500/20 to-emerald-500/5',
       borderColor: 'border-emerald-500/30',
+      glow: 'group-hover:shadow-[0_0_20px_rgba(16,185,129,0.3)]',
+      iconColor: 'text-emerald-400',
     },
     {
       icon: Zap,
@@ -96,14 +100,16 @@ const LandingPage = () => {
       description: 'Real-time ATS compatibility scoring to ensure your resume passes applicant tracking systems.',
       color: 'from-purple-500/20 to-purple-500/5',
       borderColor: 'border-purple-500/30',
+      glow: 'group-hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]',
+      iconColor: 'text-purple-400',
     },
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#0F172A] via-[#0F172A] to-[#1a1f3a]">
+    <div className="relative min-h-screen overflow-hidden bg-zinc-950">
       {/* Animated Background Blobs */}
       <motion.div
-        className="absolute top-10 left-10 w-72 h-72 rounded-full blur-3xl opacity-30 pointer-events-none"
+        className="absolute top-10 left-10 w-72 h-72 rounded-full blur-[100px] opacity-15 pointer-events-none"
         style={{
           background: 'radial-gradient(circle, #4f46e5 0%, transparent 70%)',
         }}
@@ -112,7 +118,7 @@ const LandingPage = () => {
         custom={0}
       />
       <motion.div
-        className="absolute top-1/3 right-10 w-80 h-80 rounded-full blur-3xl opacity-25 pointer-events-none"
+        className="absolute top-1/3 right-10 w-80 h-80 rounded-full blur-[100px] opacity-10 pointer-events-none"
         style={{
           background: 'radial-gradient(circle, #10b981 0%, transparent 70%)',
         }}
@@ -121,7 +127,7 @@ const LandingPage = () => {
         custom={1}
       />
       <motion.div
-        className="absolute bottom-0 left-1/2 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none"
+        className="absolute bottom-0 left-1/2 w-96 h-96 rounded-full blur-[120px] opacity-10 pointer-events-none"
         style={{
           background: 'radial-gradient(circle, #a855f7 0%, transparent 70%)',
         }}
@@ -146,10 +152,13 @@ const LandingPage = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-stone-200 bg-stone-100 shadow-sm shadow-black/20">
-              <BriefcaseBusiness className="h-7 w-7 text-stone-800" strokeWidth={1.8} />
+            <div className="flex items-center gap-3">
+              <img 
+                src="favicon.png" 
+                alt="HireAI Logo" 
+                className="w-40 h-40 object-contain rounded-xl" 
+              />
             </div>
-            <span className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">HireAI</span>
           </motion.div>
 
           {/* Main Heading with Typewriter */}
@@ -159,12 +168,12 @@ const LandingPage = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
           >
-            <h1 className="mb-5 text-center text-5xl font-bold leading-[1.08] tracking-tight text-white text-balance md:text-7xl">
+            <h1 className="mb-5 text-center text-5xl font-bold tracking-tight text-zinc-100 text-balance md:text-7xl">
               Explore opportunities for{' '}
               <span className="inline-block min-w-[220px] md:min-w-[340px]">
-                <span className="bg-gradient-to-r from-indigo-400 via-emerald-400 to-purple-400 bg-clip-text text-transparent">
+                <span className="text-zinc-100">
                   {displayText}
-                  <span className="animate-pulse">|</span>
+                  <span className="animate-pulse font-light text-indigo-500">|</span>
                 </span>
               </span>
             </h1>
@@ -172,25 +181,13 @@ const LandingPage = () => {
 
           {/* Subheading */}
           <motion.p
-            className="mb-8 max-w-2xl text-center text-lg leading-8 text-slate-300 text-balance md:text-xl"
+            className="mb-12 max-w-2xl text-center text-lg leading-8 text-zinc-400 text-balance md:text-xl font-light"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
           >
             AI-powered resume insights and intelligent job matching for candidates and hiring teams.
           </motion.p>
-
-          <motion.button
-            onClick={() => navigate('/role-select')}
-            className="inline-flex items-center justify-center rounded-xl bg-indigo-500 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-950/30 transition hover:bg-indigo-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-          >
-            Get started
-          </motion.button>
         </motion.div>
 
         {/* Features Section */}
@@ -202,8 +199,7 @@ const LandingPage = () => {
           viewport={{ once: true, amount: 0.2 }}
         >
           <motion.h2
-            className="mb-4 text-4xl font-bold leading-tight tracking-tight md:text-5xl"
-            style={{ color: '#ffffff', textAlign: 'center', textShadow: '0 8px 26px rgba(0,0,0,0.65)' }}
+            className="mb-4 text-3xl font-semibold tracking-tight md:text-4xl text-zinc-100 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -212,8 +208,7 @@ const LandingPage = () => {
             Powerful Features
           </motion.h2>
           <motion.p
-            className="text-lg md:text-xl mb-8 max-w-2xl mx-auto"
-            style={{ color: '#ffffff', textAlign: 'center' }}
+            className="text-lg md:text-xl mb-12 max-w-2xl mx-auto text-zinc-400 text-center font-light"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
@@ -233,39 +228,28 @@ const LandingPage = () => {
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ delay: index * 0.2 }}
-                  className={`group relative p-8 rounded-xl border ${feature.borderColor} backdrop-blur-sm bg-gradient-to-br ${feature.color} hover:border-opacity-100 transition-all duration-300 hover:shadow-2xl hover:shadow-white/10`}
+                  className={`group relative p-8 rounded-2xl border border-white/5 bg-zinc-900/40 backdrop-blur-md transition-all duration-500 hover:bg-zinc-900/60 hover:border-white/10 ${feature.glow}`}
                 >
                   {/* Glow effect on hover */}
                   <motion.div
-                    className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100"
+                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{
-                      background: 'radial-gradient(circle, rgba(255,255,255,0.1), transparent)',
+                      background: 'radial-gradient(circle at 50% 0%, rgba(255,255,255,0.03), transparent 70%)',
                     }}
-                    transition={{ duration: 0.3 }}
                   />
 
                   {/* Content */}
-                  <div className="relative z-10">
+                  <div className="relative z-10 flex flex-col h-full">
                     <motion.div
-                      className="mb-6"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ type: 'spring', stiffness: 300 }}
+                      className="mb-6 inline-flex p-3 rounded-xl bg-zinc-800/50 border border-white/5 shadow-sm"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 10 }}
                     >
-                      <Icon className="w-12 h-12 text-white" />
+                      <Icon className={`w-6 h-6 ${feature.iconColor}`} />
                     </motion.div>
 
-                    <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-                    <p className="text-gray-300 leading-relaxed">{feature.description}</p>
-
-                    {/* Bottom accent bar */}
-                    <motion.div
-                      className="h-1 bg-gradient-to-r from-indigo-500 via-emerald-500 to-purple-500 mt-6 rounded-full"
-                      initial={{ scaleX: 0 }}
-                      whileInView={{ scaleX: 1 }}
-                      transition={{ delay: 0.5 + index * 0.1, duration: 0.6 }}
-                      viewport={{ once: true }}
-                      style={{ originX: 0 }}
-                    />
+                    <h3 className="text-xl font-medium text-zinc-100 mb-3">{feature.title}</h3>
+                    <p className="text-zinc-400 font-light leading-relaxed flex-grow">{feature.description}</p>
                   </div>
                 </motion.div>
               );
@@ -275,37 +259,33 @@ const LandingPage = () => {
 
         {/* Footer CTA */}
         <motion.div
-          className="py-20 px-4 text-center"
+          className="py-24 px-4 text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
           <motion.h3
-            className="text-3xl md:text-4xl font-bold text-white mb-6"
+            className="text-2xl md:text-3xl font-semibold text-zinc-100 mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Ready to Transform Your Hiring?
+           Transforming How Talent Meets Opportunity
           </motion.h3>
 
           <motion.button
             onClick={() => navigate('/role-select')}
-            className="relative px-10 py-4 bg-gradient-to-r from-indigo-600 to-emerald-600 text-white font-bold rounded-lg hover:shadow-2xl hover:shadow-indigo-500/50 transition-all duration-300 group overflow-hidden text-lg"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="relative px-8 py-3.5 bg-zinc-100 text-zinc-950 font-medium rounded-full hover:bg-white transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <motion.span
-              className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity"
-              initial={false}
-            />
-            <span className="relative">Get Started Now</span>
+            Get Started Now
           </motion.button>
         </motion.div>
       </div>

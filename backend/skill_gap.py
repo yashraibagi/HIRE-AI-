@@ -99,104 +99,86 @@ def analyze_gaps(matched: list, missing: list) -> list:
     return gaps
 
 
+
 def generate_recommendations(
     ats_score: float,
     missing_skills: list,
     experience_years: float,
-    predicted_role: str,
-    confidence: float,
+    predicted_role: str = "your target role",
+    confidence: float = 0.8,
 ) -> list:
-    """
-    Build a prioritized list of recommendation dicts, each shaped as:
-    {"type": str, "title": str, "detail": str, "action": str}
-    """
     recommendations = []
 
-    # --- ATS score based recommendations -----------------------------------
+    # ATS score recommendations
     if ats_score < 50:
         recommendations.append({
             "type": "ats",
             "title": "Improve your ATS compatibility",
-            "detail": f"Your ATS score of {ats_score}/100 suggests many applicant "
-                      "tracking systems may filter this resume out before a human sees it.",
-            "action": "Add clear section headers (Experience, Education, Skills) and "
-                      "mirror key phrases from the job description.",
+            "detail": f"Your ATS score is {ats_score}/100. Improve your resume structure and keywords.",
+            "action": "Add clear section headers and relevant job description keywords.",
         })
     elif ats_score < 75:
         recommendations.append({
             "type": "ats",
             "title": "Fine-tune your resume for ATS scanners",
-            "detail": f"An ATS score of {ats_score}/100 is decent but leaves room to "
-                      "improve keyword alignment and formatting.",
-            "action": "Incorporate a few more exact keywords from the job description "
-                      "into your experience bullet points.",
+            "detail": f"Your ATS score is {ats_score}/100. There is room to improve.",
+            "action": "Include more relevant keywords in your experience bullet points.",
         })
     else:
         recommendations.append({
             "type": "ats",
             "title": "Your resume is ATS-friendly",
-            "detail": f"An ATS score of {ats_score}/100 indicates strong compatibility "
-                      "with automated screening systems.",
+            "detail": f"Your ATS score is {ats_score}/100.",
             "action": "Keep this structure and formatting for future applications.",
         })
 
-    # --- Missing skills recommendations -------------------------------------
+    # Missing skills recommendations
     if missing_skills:
         top_gaps = missing_skills[:5]
         recommendations.append({
             "type": "skills",
             "title": f"Close {len(missing_skills)} skill gap(s) for this role",
-            "detail": "The job description mentions skills not found on your resume: "
-                      + ", ".join(top_gaps) + (", and more." if len(missing_skills) > 5 else "."),
-            "action": "Prioritize learning " + (top_gaps[0] if top_gaps else "the top missing skill")
-                      + " first, then work through the rest using the linked resources.",
+            "detail": "Missing skills: " + ", ".join(top_gaps),
+            "action": "Prioritize learning " + top_gaps[0] + " first.",
         })
     else:
         recommendations.append({
             "type": "skills",
             "title": "No major skill gaps detected",
-            "detail": "Your resume already covers the key skills mentioned in the job description.",
-            "action": "Consider adding a project or certification that demonstrates depth in these skills.",
+            "detail": "Your resume covers the key skills mentioned in the job description.",
+            "action": "Consider adding a project or certification.",
         })
 
-    # --- Experience based recommendations -----------------------------------
+    # Experience recommendations
     if experience_years < 1:
         recommendations.append({
             "type": "experience",
             "title": "Highlight projects to offset limited experience",
             "detail": "Your resume shows less than a year of experience.",
-            "action": "Add academic, freelance, or personal projects with measurable outcomes "
-                      "to strengthen your experience section.",
+            "action": "Add academic, freelance, or personal projects.",
         })
     elif experience_years < 3:
         recommendations.append({
             "type": "experience",
             "title": "Emphasize growth and ownership",
-            "detail": f"With about {experience_years} year(s) of experience, "
-                      "recruiters will look for signs of increasing responsibility.",
-            "action": "Quantify impact in your bullet points (e.g., '% improvement', "
-                      "'# users', '$ saved').",
+            "detail": f"You have about {experience_years} year(s) of experience.",
+            "action": "Show measurable results in your resume.",
         })
 
-    # --- Role prediction based recommendation -------------------------------
+    # Predicted role recommendations
     if confidence < 0.5:
         recommendations.append({
             "type": "role_fit",
             "title": "Your target role isn't clearly reflected yet",
-            "detail": f"The model's best guess is '{predicted_role}' but with only "
-                      f"{round(confidence * 100)}% confidence, meaning your resume reads as "
-                      "a mix of multiple role types.",
-            "action": "Tailor your summary and top bullet points to clearly signal the "
-                      "specific role you're targeting.",
+            "detail": f"The model's best guess is '{predicted_role}' with {round(confidence * 100)}% confidence.",
+            "action": "Tailor your summary and experience to your target role.",
         })
     else:
         recommendations.append({
             "type": "role_fit",
             "title": f"Resume strongly aligns with '{predicted_role}'",
-            "detail": f"The model is {round(confidence * 100)}% confident this resume "
-                      f"reads as a {predicted_role} profile.",
-            "action": "If you're applying to a different role type, adjust your "
-                      "keywords and project highlights accordingly.",
+            "detail": f"The model is {round(confidence * 100)}% confident.",
+            "action": "Keep highlighting role-specific accomplishments.",
         })
 
     return recommendations

@@ -22,52 +22,65 @@ from interview_routes import router as interview_router
 from job_routes import router as jobs_router
 from learning_routes import router as learning_router
 from user_routes import router as user_router
-import role_classifier
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("hireai.main")
 
-app = FastAPI(
+pp = FastAPI(
     title="HireAI Backend",
     description="AI Resume Screening & Job Matching API",
     version="1.0.0",
 )
 
-default_cors_origins = "hireai018.vercel.app,hireai-git-main-raibagiyash-1018s-projects.vercel.app,hireai-bvgzgos5e-raibagiyash-1018s-projects.vercel.app"
+default_cors_origins = "https://hireai018.vercel.app,https://hireai-git-main-raibagiyash-1018s-projects.vercel.app,https://hireai-bvgzgos5e-raibagiyash-1018s-projects.vercel.app,http://localhost:3000,http://localhost:5173,http://127.0.0.1:5173,http://localhost:8000,http://localhost:8001"
 cors_origins = [
     origin.strip().rstrip("/")
     for origin in os.getenv("CORS_ORIGINS", default_cors_origins).split(",")
     if origin.strip()
 ]
 
-app.add_middleware(
+pp.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.include_router(jobs_router)
-app.include_router(user_router)
-app.include_router(interview_router)
-app.include_router(learning_router)
+pp.include_router(jobs_router)
+pp.include_router(user_router)
+pp.include_router(interview_router)
+pp.include_router(learning_router)
+import time
+from fastapi import Request
 
+@pp.middleware("http")
+async def measure_request_time(request: Request, call_next):
+    start = time.perf_counter()
 
-@app.on_event("startup")
+    response = await call_next(request)
+
+    elapsed = time.perf_counter() - start
+
+    logger.info(
+        "%s %s took %.2f seconds",
+        request.method,
+        request.url.path,
+        elapsed,
+    )
+
+    return response
+@pp.on_event("startup")
 def on_startup():
-    """Warm up the role classifier (trains once, cached to disk after)."""
     initialize_database()
-    logger.info("Starting HireAI backend — training/loading role classifier...")
-    role_classifier.train_model()
-    logger.info("Role classifier ready.")
+    logger.info("HireAI backend started successfully.")  
 
 
-@app.get("/health")
+@pp.get("/health")
 def health():
     return {"status": "ok"}
 
 
-@app.post("/analyze")
+@pp.post("/analyze")
 async def analyze(
     resume: UploadFile = File(...),
     job_description: str = Form(...),

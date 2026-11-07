@@ -6,7 +6,14 @@ export function PrivateRoute({ children, requiredRole }) {
   const { user, role, loading } = useAuth();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-zinc-950 text-zinc-400 font-light text-sm">
+        <div className="flex items-center gap-3">
+          <div className="w-4 h-4 border-2 border-zinc-700 border-t-zinc-200 rounded-full animate-spin" />
+          Loading...
+        </div>
+      </div>
+    );
   }
 
   if (!user) {
@@ -24,7 +31,14 @@ export function AuthRoute({ children }) {
   const { user, role, loading } = useAuth();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-zinc-950 text-zinc-400 font-light text-sm">
+        <div className="flex items-center gap-3">
+          <div className="w-4 h-4 border-2 border-zinc-700 border-t-zinc-200 rounded-full animate-spin" />
+          Loading...
+        </div>
+      </div>
+    );
   }
 
   if (user) {

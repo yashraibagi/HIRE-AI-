@@ -119,7 +119,7 @@ export default function LearningHub() {
             key={category}
             type="button"
             onClick={() => setSelectedCategory(category)}
-            className={`rounded-full px-3.5 py-2 text-sm font-semibold transition ${selectedCategory === category ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+            className={`rounded-full px-3.5 py-2 text-sm font-medium transition ${selectedCategory === category ? 'bg-zinc-100 text-zinc-950 shadow-sm' : 'bg-zinc-800/60 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100'}`}
           >
             {category}
           </button>
@@ -131,7 +131,7 @@ export default function LearningHub() {
             key={level}
             type="button"
             onClick={() => setSelectedLevel(level)}
-            className={`rounded-full px-3.5 py-2 text-sm font-semibold transition ${selectedLevel === level ? 'bg-violet-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+            className={`rounded-full px-3.5 py-2 text-sm font-medium transition ${selectedLevel === level ? 'bg-zinc-100 text-zinc-950 shadow-sm' : 'bg-zinc-800/60 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100'}`}
           >
             {level}
           </button>
@@ -139,11 +139,11 @@ export default function LearningHub() {
       </div>
 
       {loading ? (
-        <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-sm text-slate-500">
+        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-10 text-center text-sm text-zinc-400 backdrop-blur-md">
           Loading aptitude practice...
         </div>
       ) : aptitude.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-500">
+        <div className="rounded-2xl border border-dashed border-zinc-800 bg-zinc-900/40 p-10 text-center text-sm text-zinc-400 backdrop-blur-md">
           No aptitude questions match your filters.
         </div>
       ) : (
@@ -151,26 +151,26 @@ export default function LearningHub() {
           {aptitude.map((question) => {
             const isExpanded = !!expandedAnswers[question.id];
             return (
-              <div key={question.id} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <div key={question.id} className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5 shadow-sm backdrop-blur-md">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-indigo-700">
+                    <span className="inline-flex items-center rounded-full bg-zinc-800/80 border border-zinc-700/50 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-zinc-300">
                       {question.category}
                     </span>
-                    <span className="inline-flex items-center rounded-full bg-amber-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-amber-700 ring-1 ring-amber-200">
+                    <span className="inline-flex items-center rounded-full bg-zinc-800/80 border border-zinc-700/50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-zinc-300">
                       {question.level}
                     </span>
                   </div>
                   <button
                     type="button"
                     onClick={() => toggleAnswer(question.id)}
-                    className="text-sm font-semibold text-indigo-600 hover:text-indigo-800"
+                    className="text-sm font-medium text-zinc-200 hover:text-white transition-colors"
                   >
                     {isExpanded ? 'Hide answer' : 'Reveal answer'}
                   </button>
                 </div>
 
-                <h3 className="text-lg font-bold text-slate-900">{question.question}</h3>
+                <h3 className="text-lg font-semibold text-zinc-100">{question.question}</h3>
 
                 <div className="mt-4 grid gap-3 md:grid-cols-2">
                   {question.options.map((option) => {
@@ -180,10 +180,10 @@ export default function LearningHub() {
                     return (
                       <div
                         key={option}
-                        className={`rounded-xl border px-3 py-2 text-sm font-medium ${
+                        className={`rounded-xl border px-3 py-2.5 text-sm font-light ${
                           shouldHighlight
-                            ? 'border-emerald-200 bg-emerald-50 text-emerald-800'
-                            : 'border-slate-200 bg-slate-50 text-slate-700'
+                            ? 'border-zinc-700 bg-zinc-800 text-zinc-100'
+                            : 'border-zinc-800 bg-zinc-950/60 text-zinc-300'
                         }`}
                       >
                         {option}
@@ -193,9 +193,9 @@ export default function LearningHub() {
                 </div>
 
                 {isExpanded && (
-                  <div className="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-slate-700">
-                    <p className="font-semibold text-amber-800">Correct answer: {question.correct_answer}</p>
-                    <p className="mt-2 leading-6">{question.explanation}</p>
+                  <div className="mt-5 rounded-xl border border-zinc-800 bg-zinc-950/80 p-4 text-sm text-zinc-300">
+                    <p className="font-medium text-zinc-100">Correct answer: {question.correct_answer}</p>
+                    <p className="mt-2 leading-6 font-light">{question.explanation}</p>
                   </div>
                 )}
               </div>
@@ -214,7 +214,7 @@ export default function LearningHub() {
             key={level}
             type="button"
             onClick={() => setSelectedLevel(level)}
-            className={`rounded-full px-3.5 py-2 text-sm font-semibold transition ${selectedLevel === level ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+            className={`rounded-full px-3.5 py-2 text-sm font-medium transition ${selectedLevel === level ? 'bg-zinc-100 text-zinc-950 shadow-sm' : 'bg-zinc-800/60 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100'}`}
           >
             {level}
           </button>
@@ -227,7 +227,7 @@ export default function LearningHub() {
             key={pattern}
             type="button"
             onClick={() => setSelectedPattern(pattern)}
-            className={`rounded-full px-3.5 py-2 text-sm font-semibold transition ${selectedPattern === pattern ? 'bg-violet-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+            className={`rounded-full px-3.5 py-2 text-sm font-medium transition ${selectedPattern === pattern ? 'bg-zinc-100 text-zinc-950 shadow-sm' : 'bg-zinc-800/60 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100'}`}
           >
             {pattern}
           </button>
@@ -235,11 +235,11 @@ export default function LearningHub() {
       </div>
 
       {loading ? (
-        <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-sm text-slate-500">
+        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-10 text-center text-sm text-zinc-400 backdrop-blur-md">
           Loading DSA practice problems...
         </div>
       ) : dsa.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-500">
+        <div className="rounded-2xl border border-dashed border-zinc-800 bg-zinc-900/40 p-10 text-center text-sm text-zinc-400 backdrop-blur-md">
           No DSA problems match the selected filters.
         </div>
       ) : (
@@ -247,37 +247,37 @@ export default function LearningHub() {
           {dsa.map((problem) => {
             const isExpanded = !!expandedSolutions[problem.id];
             return (
-              <div key={problem.id} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <div key={problem.id} className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5 shadow-sm backdrop-blur-md">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-violet-600">{problem.pattern}</p>
-                    <h3 className="mt-1 text-2xl font-bold text-slate-900">{problem.title}</h3>
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">{problem.pattern}</p>
+                    <h3 className="mt-1 text-2xl font-bold text-zinc-100">{problem.title}</h3>
                   </div>
-                  <span className="inline-flex w-fit items-center rounded-full bg-violet-50 px-2.5 py-1 text-xs font-bold text-violet-700 ring-1 ring-inset ring-violet-200">
+                  <span className="inline-flex w-fit items-center rounded-full bg-zinc-800/80 border border-zinc-700/50 px-3 py-1 text-xs font-semibold text-zinc-300">
                     {problem.level}
                   </span>
                 </div>
 
-                <div className="mt-5 rounded-xl bg-slate-50 p-4 text-sm leading-7 text-slate-700">
+                <div className="mt-5 rounded-xl bg-zinc-950/60 border border-zinc-800/80 p-4 text-sm leading-7 text-zinc-300 font-light">
                   {problem.statement}
                 </div>
 
                 <div className="mt-5">
-                  <p className="text-sm font-semibold text-slate-800">Approach</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">{problem.approach}</p>
+                  <p className="text-sm font-semibold text-zinc-200">Approach</p>
+                  <p className="mt-2 text-sm leading-6 text-zinc-400 font-light">{problem.approach}</p>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => toggleSolution(problem.id)}
-                  className="mt-5 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+                  className="mt-5 inline-flex items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-800/80 px-4 py-2.5 text-sm font-medium text-zinc-200 transition hover:bg-zinc-800 hover:text-zinc-100"
                 >
                   <Code2 size={16} />
                   {isExpanded ? 'Hide Python Solution' : 'View Python Solution'}
                 </button>
 
                 {isExpanded && (
-                  <pre className="mt-4 overflow-x-auto rounded-xl bg-slate-950 p-4 text-sm text-slate-100">
+                  <pre className="mt-4 overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-sm text-zinc-200 font-mono">
                     <code>{problem.python_solution}</code>
                   </pre>
                 )}
@@ -297,7 +297,7 @@ export default function LearningHub() {
             key={level}
             type="button"
             onClick={() => setSelectedLevel(level)}
-            className={`rounded-full px-3.5 py-2 text-sm font-semibold transition ${selectedLevel === level ? 'bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+            className={`rounded-full px-3.5 py-2 text-sm font-medium transition ${selectedLevel === level ? 'bg-zinc-100 text-zinc-950 shadow-sm' : 'bg-zinc-800/60 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100'}`}
           >
             {level}
           </button>
@@ -309,7 +309,7 @@ export default function LearningHub() {
             key={topic}
             type="button"
             onClick={() => setSelectedTopic(topic)}
-            className={`rounded-full px-3.5 py-2 text-sm font-semibold transition ${selectedTopic === topic ? 'bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+            className={`rounded-full px-3.5 py-2 text-sm font-medium transition ${selectedTopic === topic ? 'bg-zinc-100 text-zinc-950 shadow-sm' : 'bg-zinc-800/60 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100'}`}
           >
             {topic}
           </button>
@@ -317,18 +317,18 @@ export default function LearningHub() {
       </div>
 
       {loading ? (
-        <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-sm text-slate-500">
+        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-10 text-center text-sm text-zinc-400 backdrop-blur-md">
           Loading curated videos...
         </div>
       ) : videos.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-500">
+        <div className="rounded-2xl border border-dashed border-zinc-800 bg-zinc-900/40 p-10 text-center text-sm text-zinc-400 backdrop-blur-md">
           No videos found for this topic.
         </div>
       ) : (
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {videos.map((video) => (
-            <div key={video.id} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-              <div className="aspect-video overflow-hidden bg-slate-100">
+            <div key={video.id} className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 shadow-sm backdrop-blur-md">
+              <div className="aspect-video overflow-hidden bg-zinc-950">
                 <iframe
                   src={getYouTubeEmbedUrl(video.url)}
                   title={video.title}
@@ -341,23 +341,23 @@ export default function LearningHub() {
 
               <div className="p-4">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="inline-flex rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-700">
+                  <span className="inline-flex rounded-full bg-zinc-800/80 border border-zinc-700/50 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-300">
                     {video.category}
                   </span>
-                  <span className="inline-flex rounded-full bg-blue-50 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-blue-700">
+                  <span className="inline-flex rounded-full bg-zinc-800/80 border border-zinc-700/50 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-300">
                     {video.level}
                   </span>
                 </div>
-                <h3 className="mt-3 text-lg font-bold text-slate-900">{video.title}</h3>
-                <p className="mt-2 text-sm font-medium text-slate-500">{video.topic}</p>
+                <h3 className="mt-3 text-lg font-bold text-zinc-100">{video.title}</h3>
+                <p className="mt-2 text-sm font-medium text-zinc-400">{video.topic}</p>
                 {video.description && (
-                  <p className="mt-3 text-sm leading-6 text-slate-600">{video.description}</p>
+                  <p className="mt-3 text-sm leading-6 text-zinc-300 font-light">{video.description}</p>
                 )}
                 <a
                   href={video.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-4 inline-flex items-center text-sm font-semibold text-emerald-700 hover:text-emerald-900"
+                  className="mt-4 inline-flex items-center text-sm font-medium text-zinc-200 hover:text-white"
                 >
                   Open on YouTube
                 </a>
@@ -370,33 +370,33 @@ export default function LearningHub() {
   );
 
   return (
-    <div className="min-h-full space-y-5 p-5 text-left sm:p-8">
-      <header className="flex flex-col gap-5 rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50 via-white to-violet-50 p-6 shadow-sm md:flex-row md:items-center md:justify-between">
+    <div className="min-h-full space-y-5 p-5 text-left sm:p-8 bg-zinc-950 text-zinc-100">
+      <header className="flex flex-col gap-5 rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6 shadow-sm backdrop-blur-md md:flex-row md:items-center md:justify-between">
         <div className="flex items-start gap-3">
-          <div className="rounded-xl bg-indigo-600 p-3 text-white shadow-sm">
+          <div className="rounded-xl border border-zinc-700 bg-zinc-800/80 p-3 text-zinc-100 shadow-sm">
             <BookOpen size={24} />
           </div>
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-indigo-600">Comprehensive learning hub</p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-950">Beginner to Advanced interview prep</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-400">Comprehensive learning hub</p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-zinc-100">Beginner to Advanced interview prep</h2>
           </div>
         </div>
-        <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 text-sm font-medium text-slate-600 shadow-sm ring-1 ring-slate-200">
-          <Sparkles size={16} className="text-amber-500" />
+        <div className="inline-flex items-center gap-2 rounded-full bg-zinc-900/80 px-3.5 py-2 text-sm font-medium text-zinc-300 shadow-sm border border-zinc-800">
+          <Sparkles size={16} className="text-zinc-300" />
           Smart fundamentals + interview drills
         </div>
       </header>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-2 shadow-sm">
+      <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-2 shadow-sm backdrop-blur-md">
         <nav className="flex flex-wrap gap-2" aria-label="Learning hub navigation">
           {tabs.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               type="button"
               onClick={() => setActiveTab(id)}
-              className={`inline-flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition ${activeTab === id ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'}`}
+              className={`inline-flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition ${activeTab === id ? 'bg-zinc-800 text-zinc-100 border border-zinc-700 shadow-sm' : 'text-zinc-400 hover:bg-zinc-900/60 hover:text-zinc-200'}`}
             >
-              <Icon size={17} />
+              <Icon size={17} className={activeTab === id ? 'text-zinc-100' : 'text-zinc-400'} />
               {label}
             </button>
           ))}
@@ -404,7 +404,7 @@ export default function LearningHub() {
       </div>
 
       {error && (
-        <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+        <div className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-200 backdrop-blur-md">
           {error}
         </div>
       )}

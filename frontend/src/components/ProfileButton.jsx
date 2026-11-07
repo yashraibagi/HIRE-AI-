@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
@@ -146,17 +146,17 @@ export default function ProfileButton() {
         aria-haspopup="menu"
         aria-expanded={menuOpen}
         onClick={() => { setMenuOpen((current) => !current); setMenuError(''); }}
-        className="flex w-full min-w-0 items-center gap-3 rounded-xl border border-transparent p-2 text-left transition hover:border-slate-200 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300"
+        className="flex w-full min-w-0 items-center gap-3 rounded-xl border border-transparent p-2 text-left transition hover:border-zinc-800 hover:bg-zinc-900/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-700"
       >
-        <span className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl bg-indigo-100 text-sm font-bold text-indigo-700 ring-1 ring-inset ring-indigo-200">
+        <span className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl border border-zinc-700 bg-zinc-800 text-sm font-semibold text-zinc-100">
           {avatarSrc ? <img src={avatarSrc} alt="" className="h-full w-full object-cover" /> : initials}
-          <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-white bg-emerald-500" />
+          <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-zinc-950 bg-emerald-500" />
         </span>
         <span className="min-w-0 flex-1 max-md:hidden">
-          <span className="block truncate text-sm font-semibold text-slate-900">{displayName}</span>
-          <span className="mt-0.5 inline-flex rounded-full bg-indigo-50 px-2 py-0.5 text-[10px] font-semibold capitalize text-indigo-700">{accountRole}</span>
+          <span className="block truncate text-sm font-medium text-zinc-100">{displayName}</span>
+          <span className="mt-0.5 inline-flex rounded-full border border-zinc-800 bg-zinc-900 px-2 py-0.5 text-[10px] font-semibold capitalize text-zinc-300">{accountRole}</span>
         </span>
-        <ChevronDown size={16} className={`shrink-0 text-slate-400 transition-transform max-md:hidden ${menuOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown size={16} className={`shrink-0 text-zinc-400 transition-transform max-md:hidden ${menuOpen ? 'rotate-180' : ''}`} />
       </button>
 
       <AnimatePresence>
@@ -167,46 +167,46 @@ export default function ProfileButton() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.98 }}
             transition={{ duration: 0.14 }}
-            className="absolute bottom-full right-0 z-60 mb-3 w-[min(20rem,calc(100vw-1.5rem))] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl"
+            className="absolute bottom-full right-0 z-60 mb-3 w-[min(20rem,calc(100vw-1.5rem))] overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/95 backdrop-blur-xl shadow-2xl text-zinc-100"
           >
-            <div className="flex items-center gap-3 border-b border-slate-100 p-4">
-              <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl bg-indigo-100 text-sm font-bold text-indigo-700">
+            <div className="flex items-center gap-3 border-b border-zinc-800 p-4">
+              <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl border border-zinc-700 bg-zinc-800 text-sm font-bold text-zinc-100">
                 {avatarSrc ? <img src={avatarSrc} alt="" className="h-full w-full object-cover" /> : initials}
               </span>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-semibold text-slate-900">{displayName}</p>
-                <p className="truncate text-xs text-slate-500">{email}</p>
-                <span className="mt-1 inline-flex rounded-full bg-indigo-50 px-2 py-0.5 text-[10px] font-semibold capitalize text-indigo-700">{accountRole}</span>
+                <p className="truncate text-sm font-semibold text-zinc-100">{displayName}</p>
+                <p className="truncate text-xs font-light text-zinc-400">{email}</p>
+                <span className="mt-1 inline-flex rounded-full border border-zinc-800 bg-zinc-900 px-2 py-0.5 text-[10px] font-semibold capitalize text-zinc-300">{accountRole}</span>
               </div>
             </div>
 
             <div className="space-y-1 p-2">
-              <button type="button" role="menuitem" onClick={() => openProfileModal('personal')} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm text-slate-700 hover:bg-slate-50"><UserRound size={17} className="text-slate-500" />View / edit profile</button>
+              <button type="button" role="menuitem" onClick={() => openProfileModal('personal')} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-light text-zinc-300 hover:bg-zinc-900 hover:text-zinc-100 transition-colors"><UserRound size={17} className="text-zinc-400" />View / edit profile</button>
               {isRecruiter ? (
-                <button type="button" role="switch" aria-checked={Boolean(profile?.preferences?.blind_screening)} disabled={blindSaving} onClick={toggleBlindScreening} className="flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-left text-sm text-slate-700 hover:bg-slate-50 disabled:opacity-60">
-                  <span className="flex items-center gap-3"><ShieldCheck size={17} className="text-slate-500" />Blind screening</span>
-                  <span className={`relative h-5 w-9 rounded-full transition ${profile?.preferences?.blind_screening ? 'bg-indigo-600' : 'bg-slate-300'}`}><span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition ${profile?.preferences?.blind_screening ? 'left-4.5' : 'left-0.5'}`} /></span>
+                <button type="button" role="switch" aria-checked={Boolean(profile?.preferences?.blind_screening)} disabled={blindSaving} onClick={toggleBlindScreening} className="flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-light text-zinc-300 hover:bg-zinc-900 hover:text-zinc-100 transition-colors disabled:opacity-60">
+                  <span className="flex items-center gap-3"><ShieldCheck size={17} className="text-zinc-400" />Blind screening</span>
+                  <span className={`relative h-5 w-9 rounded-full transition ${profile?.preferences?.blind_screening ? 'bg-zinc-100' : 'bg-zinc-800 border border-zinc-700'}`}><span className={`absolute top-0.5 h-4 w-4 rounded-full shadow transition ${profile?.preferences?.blind_screening ? 'left-4.5 bg-zinc-950' : 'left-0.5 bg-zinc-400'}`} /></span>
                 </button>
               ) : (
-                <button type="button" role="menuitem" onClick={() => openProfileModal('preferences')} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm text-slate-700 hover:bg-slate-50"><BookOpenText size={17} className="text-slate-500" />Default resume manager</button>
+                <button type="button" role="menuitem" onClick={() => openProfileModal('preferences')} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-light text-zinc-300 hover:bg-zinc-900 hover:text-zinc-100 transition-colors"><BookOpenText size={17} className="text-zinc-400" />Default resume manager</button>
               )}
-              <button type="button" role="menuitem" onClick={() => openProfileModal('security')} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm text-slate-700 hover:bg-slate-50"><Settings2 size={17} className="text-slate-500" />Account settings & security</button>
-              <button type="button" role="menuitem" aria-expanded={helpOpen} onClick={() => setHelpOpen((current) => !current)} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm text-slate-700 hover:bg-slate-50"><CircleHelp size={17} className="text-slate-500" />Help & documentation</button>
-              {helpOpen && <div className="mx-3 rounded-lg bg-slate-50 p-3 text-xs leading-5 text-slate-600">{isRecruiter ? 'Recruiter access and organization details are managed by your workspace administrator. Use Jobs & Applicants to manage openings and review candidates.' : 'Keep your profile resume current in Preferences. Use Applied Jobs to follow status changes and Interview Prep to practice.'}</div>}
-              {menuError && <p role="alert" className="mx-2 rounded-lg bg-rose-50 px-3 py-2 text-xs text-rose-700">{menuError}</p>}
+              <button type="button" role="menuitem" onClick={() => openProfileModal('security')} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-light text-zinc-300 hover:bg-zinc-900 hover:text-zinc-100 transition-colors"><Settings2 size={17} className="text-zinc-400" />Account settings & security</button>
+              <button type="button" role="menuitem" aria-expanded={helpOpen} onClick={() => setHelpOpen((current) => !current)} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-light text-zinc-300 hover:bg-zinc-900 hover:text-zinc-100 transition-colors"><CircleHelp size={17} className="text-zinc-400" />Help & documentation</button>
+              {helpOpen && <div className="mx-3 rounded-lg border border-zinc-800 bg-zinc-900/60 p-3 text-xs leading-5 font-light text-zinc-300">{isRecruiter ? 'Recruiter access and organization details are managed by your workspace administrator. Use Jobs & Applicants to manage openings and review candidates.' : 'Keep your profile resume current in Preferences. Use Applied Jobs to follow status changes and Interview Prep to practice.'}</div>}
+              {menuError && <p role="alert" className="mx-2 rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-2 text-xs text-zinc-200">{menuError}</p>}
             </div>
 
-            <div className="border-t border-slate-100 p-2">
+            <div className="border-t border-zinc-800 p-2">
               {confirmLogout ? (
-                <div className="rounded-lg bg-rose-50 p-3">
-                  <p className="text-sm font-medium text-slate-800">Sign out of HireAI?</p>
+                <div className="rounded-lg border border-zinc-800 bg-zinc-900/80 p-3">
+                  <p className="text-sm font-medium text-zinc-100">Sign out of HireAI?</p>
                   <div className="mt-2 flex justify-end gap-2">
-                    <button type="button" onClick={() => setConfirmLogout(false)} className="rounded-md px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-white">Cancel</button>
-                    <button type="button" onClick={handleLogout} className="rounded-md bg-rose-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-rose-700">Sign out</button>
+                    <button type="button" onClick={() => setConfirmLogout(false)} className="rounded-md px-3 py-1.5 text-xs font-medium text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100 transition-colors">Cancel</button>
+                    <button type="button" onClick={handleLogout} className="rounded-md border border-zinc-700 bg-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-100 hover:bg-zinc-700 transition-colors">Sign out</button>
                   </div>
                 </div>
               ) : (
-                <button type="button" role="menuitem" onClick={() => setConfirmLogout(true)} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-rose-700 hover:bg-rose-50"><LogOut size={17} />Sign out</button>
+                <button type="button" role="menuitem" onClick={() => setConfirmLogout(true)} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-zinc-300 hover:bg-zinc-900 hover:text-zinc-100 transition-colors"><LogOut size={17} className="text-zinc-400" />Sign out</button>
               )}
             </div>
           </motion.div>

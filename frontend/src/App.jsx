@@ -59,7 +59,9 @@ export default function App() {
   return (
     <Router>
       <AuthProvider>
-        <AppRoutes />
+        <div className="min-h-screen bg-zinc-950 text-zinc-100 antialiased selection:bg-zinc-800 selection:text-zinc-100">
+          <AppRoutes />
+        </div>
       </AuthProvider>
     </Router>
   );
