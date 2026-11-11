@@ -121,6 +121,10 @@ def match(resume_data: dict, jd_text: str) -> dict:
     resume_education = resume_data.get("education", extract_education(resume_text))
 
     jd_skills = extract_skills(jd_text)
+    print("\n===== JOB DESCRIPTION DEBUG =====")
+print("JOB DESCRIPTION:", jd_text)
+print("EXTRACTED JOB SKILLS:", jd_skills)
+print("================================")
 
     matched_skills = get_matched_skills(resume_skills, jd_skills)
     missing_skills = get_missing_skills(resume_skills, jd_skills)
